@@ -6,11 +6,20 @@
 /*   By: okamili <okamili@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 01:36:03 by okamili           #+#    #+#             */
-/*   Updated: 2023/11/04 23:18:51 by okamili          ###   ########.fr       */
+/*   Updated: 2023/11/05 04:40:44 by okamili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Contact.hpp"
+
+Contact::Contact(void)
+{
+	_firstName = "";
+	_lastName = "";
+	_nickName = "";
+	_phoneNum = "";
+	_darkSecret = "";
+}
 
 std::string	Contact::getFirstName(void) const
 {
@@ -37,16 +46,20 @@ std::string	Contact::getDarkSecret(void) const
 	return (this->_darkSecret);
 }
 
-std::string Contact::_get_input(std::string prompt, int validate)
+std::string	Contact::get_input(std::string prompt, int validate)
 {
 	std::string	input;
 	
+	if (std::cin.eof())
+		std::cout << "\n";
+	std::cin.clear();
+	clearerr(stdin);
 	std::cout << prompt << "> ";
 	getline(std::cin, input);
 	if ((validate >= 0 && validate <= 2) && input.empty())
 	{
-		std::cout << "\tError: empty input\n";
-		return (_get_input(prompt, validate));
+		std::cout << "\t\033[0;31mError\033[0m: empty input\n";
+		return (get_input(prompt, validate));
 	}
 	if (validate == 1)
 	{
@@ -54,9 +67,8 @@ std::string Contact::_get_input(std::string prompt, int validate)
 		{
 			if (!isdigit(input[i]))
 			{
-				std::cout << "\tError: input must only contains numbers\n";
-				std::cout << "\texample: 0999999999...\n";
-				return (_get_input(prompt, validate));
+				std::cout << "\t\033[0;31mError\033[0m: input must only contains numbers\n";
+				return (get_input(prompt, validate));
 			}
 		}
 	}
@@ -66,19 +78,19 @@ std::string Contact::_get_input(std::string prompt, int validate)
 		{
 			if (!isalpha(input[i]) && !isspace(input[i]))
 			{
-				std::cout << "\tError: input must only contains alpha characters\n";
-				return (_get_input(prompt, validate));
+				std::cout << "\t\033[0;31mError\033[0m: input must only contains alpha characters\n";
+				return (get_input(prompt, validate));
 			}
 		}
 	}
 	return (input);
 }
 
-void Contact::populate(void)
+void	Contact::populate(void)
 {
-	this->_firstName = this->_get_input("Enter First Name", 0);
-	this->_lastName = this->_get_input("Enter Last Name", 0);
-	this->_nickName = this->_get_input("Enter Nick Name", 0);
-	this->_phoneNum = this->_get_input("Enter Phone Number", 1);
-	this->_darkSecret = this->_get_input("Enter Darkest Secret", 2);
+	this->_firstName = this->get_input("Enter FirstName", 0);
+	this->_lastName = this->get_input("Enter LastName", 0);
+	this->_nickName = this->get_input("Enter NickName", 0);
+	this->_phoneNum = this->get_input("Enter PhoneNumber", 1);
+	this->_darkSecret = this->get_input("Enter DarkSecret", 2);
 }

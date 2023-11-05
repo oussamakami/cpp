@@ -6,17 +6,16 @@
 /*   By: okamili <okamili@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 02:05:57 by okamili           #+#    #+#             */
-/*   Updated: 2023/11/04 19:04:53 by okamili          ###   ########.fr       */
+/*   Updated: 2023/11/05 04:41:38 by okamili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Contact.hpp"
+#include "PhoneBook.hpp"
 
-int main()
+int	main()
 {
+	PhoneBook	data;
 
-	Contact hello;
-
-	hello.populate();
-	std::cout << hello.getFirstName();
+	data.ComMonitor();
+	return (0);
 }
