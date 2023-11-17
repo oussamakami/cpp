@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   WrongCat.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: okamili <okamili@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 19:19:45 by okamili           #+#    #+#             */
-/*   Updated: 2023/11/17 11:36:23 by okamili          ###   ########.fr       */
+/*   Created: 2023/11/17 11:17:23 by okamili           #+#    #+#             */
+/*   Updated: 2023/11/17 11:30:51 by okamili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANIMAL_HPP
-# define ANIMAL_HPP
+#include "WrongCat.hpp"
 
-# include <iostream>
-
-class Animal
+WrongCat::WrongCat(void)
 {
-	protected:
-		std::string type;
-	public:
-		Animal(void);
-		Animal(std::string type);
-		Animal(const Animal &origin);
-		Animal	&operator=(const Animal &origin);
-		virtual ~Animal(void);
-		virtual void	makeSound(void) const;
-		std::string	getType(void) const;
-};
+	std::cout << "WrongCat Constructor\n";
+	type = "lion";
+}
 
-#endif
+WrongCat::~WrongCat(void)
+{
+	std::cout << "WrongCat Deconstructor\n";
+}
+
+void	WrongCat::makeSound(void) const
+{
+	std::cout << "roooaar!!\n";
+}

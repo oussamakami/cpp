@@ -6,7 +6,7 @@
 /*   By: okamili <okamili@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 19:25:20 by okamili           #+#    #+#             */
-/*   Updated: 2023/11/13 19:33:32 by okamili          ###   ########.fr       */
+/*   Updated: 2023/11/17 11:00:23 by okamili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,5 @@ std::string	Animal::getType(void) const
 
 void	Animal::makeSound(void) const
 {
-	std::cout << "Animal sound\n";	
+	std::cout << "Animal sound\n";
 }
