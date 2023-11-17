@@ -6,7 +6,7 @@
 /*   By: okamili <okamili@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 11:18:03 by okamili           #+#    #+#             */
-/*   Updated: 2023/11/13 14:18:10 by okamili          ###   ########.fr       */
+/*   Updated: 2023/11/17 07:17:28 by okamili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ Fixed::Fixed(const float num)
 	std::cout << "Float constructor called\n";
 	for (int i = 0; i < fractionalBits; i++)
 		shiftCount *= 2;
-	this->fixedPoint = std::roundf(num * shiftCount);
+	this->fixedPoint = roundf(num * shiftCount);
 }
 
 Fixed::Fixed(const Fixed &origin)
