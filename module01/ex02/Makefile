@@ -1,5 +1,5 @@
-CC			=	c++
-CFLAGS		=	-Wall -Wextra -Werror -std=c++98
+CXX			=	c++
+CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
 FILES		=	main.cpp
 OBJ			=	$(FILES:.cpp=.o)
 NAME		=	brain
@@ -7,7 +7,7 @@ NAME		=	brain
 all:		$(NAME)
 
 $(NAME):	$(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 clean:
 	rm -rf $(OBJ)

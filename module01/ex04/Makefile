@@ -1,5 +1,5 @@
-CC			=	c++
-CFLAGS		=	-Wall -Wextra -Werror -std=c++98
+CXX			=	c++
+CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
 FILES		=	FileStream.cpp main.cpp
 OBJ			=	$(FILES:.cpp=.o)
 NAME		=	cppsed
@@ -7,7 +7,7 @@ NAME		=	cppsed
 all:		$(NAME)
 
 $(NAME):	$(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 clean:
 	rm -rf $(OBJ)

@@ -6,7 +6,7 @@
 /*   By: okamili <okamili@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 01:47:54 by okamili           #+#    #+#             */
-/*   Updated: 2023/11/09 04:45:16 by okamili          ###   ########.fr       */
+/*   Updated: 2023/11/17 06:56:21 by okamili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ FileStream::FileStream(std::string inFile, std::string oldStr, std::string newSt
 	_fileName = inFile;
 	_oldString = oldStr;
 	_newString = newStr;
-	_inputFile.open(inFile);
+	_inputFile.open(inFile.c_str());
 	_buffer = std::string("");
 }
 
@@ -62,7 +62,7 @@ void	FileStream::replaceStr(void)
 
 int	FileStream::writeOutput(void)
 {
-	this->_outputFile.open(this->_fileName + ".replace");
+	this->_outputFile.open((this->_fileName + ".replace").c_str());
 	if (this->_outputFile.is_open())
 		this->_outputFile << this->_buffer;
 	else
