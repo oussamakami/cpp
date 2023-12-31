@@ -6,7 +6,7 @@
 /*   By: okamili <okamili@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 09:42:16 by okamili           #+#    #+#             */
-/*   Updated: 2023/12/30 20:01:03 by okamili          ###   ########.fr       */
+/*   Updated: 2023/12/31 13:28:03 by okamili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int add(int &num)
 {
 	num++;
-	return (0);
+	return (num);
 }
 
 template <class I>
