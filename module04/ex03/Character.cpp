@@ -6,7 +6,7 @@
 /*   By: okamili <okamili@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 23:26:08 by okamili           #+#    #+#             */
-/*   Updated: 2023/12/25 13:24:55 by okamili          ###   ########.fr       */
+/*   Updated: 2024/01/06 02:24:07 by okamili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ Character	&Character::operator=(const Character &origin)
 	for (int i = 0; i < 4; i++)
 		this->_items[i] = (origin._items[i]) ? (origin._items[i])->clone() : NULL;
 	_garbage = NULL;
+	_garbage_length = 0;
 	return (*this);
 }
 
