@@ -6,13 +6,13 @@
 /*   By: okamili <okamili@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 21:22:19 by okamili           #+#    #+#             */
-/*   Updated: 2023/12/30 22:33:47 by okamili          ###   ########.fr       */
+/*   Updated: 2024/05/21 20:29:07 by okamili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Array.hpp"
 
-template <class T>
+template <typename T>
 void	listArray(Array<T> &data, std::string arrayName)
 {
 	std::cout << arrayName << " = {";

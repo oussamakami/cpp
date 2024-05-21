@@ -6,7 +6,7 @@
 /*   By: okamili <okamili@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 21:05:36 by okamili           #+#    #+#             */
-/*   Updated: 2023/12/30 22:31:06 by okamili          ###   ########.fr       */
+/*   Updated: 2024/05/21 20:28:43 by okamili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include <iostream>
 
-template <class T>
+template <typename T>
 class Array
 {
 	private:
@@ -24,10 +24,10 @@ class Array
 	public:
 		Array(void);
 		Array(size_t length);
-		Array(const Array &origin);
+		Array(const Array<T> &origin);
 		~Array(void);
 		
-		Array	&operator=(const Array &origin);
+		Array	&operator=(const Array<T> &origin);
 		T		&operator[](size_t index);
 		size_t	size(void) const;
 
@@ -38,29 +38,31 @@ class Array
 		};
 };
 
-template <class T>
-Array<T>::Array(void) : _data(new T()), _size(0)
+template <typename T>
+Array<T>::Array(void) : _data(NULL), _size(0)
 {}
 
-template <class T>
-Array<T>::Array(size_t length) : _data(new T[length]()), _size(length)
+template <typename T>
+Array<T>::Array(size_t length) : _data(NULL), _size(length)
 {
+	if (length)
+		_data = new T[length]();
 }
 
-template <class T>
-Array<T>::Array(const Array &origin)
+template <typename T>
+Array<T>::Array(const Array<T> &origin) : _data(NULL), _size(0)
 {
 	*this = origin;
 }
 
-template <class T>
+template <typename T>
 Array<T>::~Array(void)
 {
 	delete [] _data;
 }
 
-template <class T>
-Array<T> &Array<T>::operator=(const Array &origin)
+template <typename T>
+Array<T> &Array<T>::operator=(const Array<T> &origin)
 {
 	if (this == &origin)
 		return (*this);
@@ -74,7 +76,7 @@ Array<T> &Array<T>::operator=(const Array &origin)
 	return (*this);
 }
 
-template <class T>
+template <typename T>
 T &Array<T>::operator[](size_t index)
 {
 	if (index >= _size)
@@ -83,13 +85,13 @@ T &Array<T>::operator[](size_t index)
 	return (_data[index]);
 }
 
-template <class T>
+template <typename T>
 size_t Array<T>::size(void) const
 {
 	return (this->_size);
 }
 
-template <class T>
+template <typename T>
 const char *Array<T>::OverShootException::what(void) const throw()
 {
 	return ("Error: Invalid Index\n");
