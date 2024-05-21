@@ -6,7 +6,7 @@
 /*   By: okamili <okamili@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 19:11:20 by okamili           #+#    #+#             */
-/*   Updated: 2023/12/27 19:22:12 by okamili          ###   ########.fr       */
+/*   Updated: 2024/05/21 18:14:41 by okamili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,21 @@ int main()
 	Data *a = new Data;
 	Data *b = NULL;
 	uintptr_t raw;
+	uintptr_t raw2;
 	
 
 	a->info = "test0";
+
 	raw = Serializer::serialize(a);
-	
+	raw2 = Serializer::serialize(b);
+
 	std::cout << "data info [a]: " << a->info << "\n";
-	std::cout << "data info [b]: (NULL)\n\n";
 	std::cout << "data info [a] serial: " << raw << "\n\n";
-	
+
+	std::cout << "data info [b]: (NULL)\n";
+	std::cout << "data info [b] serial: " << raw2 << "\n\n";
+
+	std::cout << "===setting [b] to point at the same block as [a]===\n";
 	b = Serializer::deserialize(raw);
 
 	std::cout << "data info [a]: " << a->info << "\n";
