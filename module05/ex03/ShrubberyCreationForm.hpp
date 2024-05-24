@@ -6,7 +6,7 @@
 /*   By: okamili <okamili@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 00:48:47 by okamili           #+#    #+#             */
-/*   Updated: 2023/11/30 07:17:00 by okamili          ###   ########.fr       */
+/*   Updated: 2024/05/24 17:03:33 by okamili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ class ShrubberyCreationForm : public AForm
 		ShrubberyCreationForm(const std::string target);
 		ShrubberyCreationForm(const ShrubberyCreationForm &origin);
 		~ShrubberyCreationForm(void);
+
+		ShrubberyCreationForm	&operator=(ShrubberyCreationForm &origin);
 		void	execute(Bureaucrat const &executor) const;
 
 		class FileOperationException : public std::exception

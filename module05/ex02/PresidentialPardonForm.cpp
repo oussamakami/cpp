@@ -6,7 +6,7 @@
 /*   By: okamili <okamili@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 02:24:14 by okamili           #+#    #+#             */
-/*   Updated: 2023/11/30 07:41:03 by okamili          ###   ########.fr       */
+/*   Updated: 2024/05/24 16:59:29 by okamili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@ PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &ori
 
 PresidentialPardonForm::~PresidentialPardonForm(void)
 {
+}
+
+PresidentialPardonForm	&PresidentialPardonForm::operator=(PresidentialPardonForm &origin)
+{
+	_target = origin._target;
+	return (*this);
 }
 
 void	PresidentialPardonForm::execute(Bureaucrat const &executor) const

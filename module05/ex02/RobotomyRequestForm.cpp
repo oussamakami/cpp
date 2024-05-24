@@ -6,7 +6,7 @@
 /*   By: okamili <okamili@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 02:20:39 by okamili           #+#    #+#             */
-/*   Updated: 2023/11/30 07:42:52 by okamili          ###   ########.fr       */
+/*   Updated: 2024/05/24 16:59:51 by okamili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@ RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &origin) :
 
 RobotomyRequestForm::~RobotomyRequestForm(void)
 {
+}
+
+RobotomyRequestForm	&RobotomyRequestForm::operator=(RobotomyRequestForm &origin)
+{
+	_target = origin._target;
+	return (*this);
 }
 
 void	RobotomyRequestForm::execute(Bureaucrat const &executor) const

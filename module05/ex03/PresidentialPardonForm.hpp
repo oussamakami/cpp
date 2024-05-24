@@ -6,7 +6,7 @@
 /*   By: okamili <okamili@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 02:22:17 by okamili           #+#    #+#             */
-/*   Updated: 2023/11/30 07:22:04 by okamili          ###   ########.fr       */
+/*   Updated: 2024/05/24 17:03:04 by okamili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ class PresidentialPardonForm : public AForm
 		PresidentialPardonForm(const std::string target);
 		PresidentialPardonForm(const PresidentialPardonForm &origin);
 		~PresidentialPardonForm(void);
+
+		PresidentialPardonForm	&operator=(PresidentialPardonForm &origin);
 		void	execute(Bureaucrat const &executor) const;
 };
 

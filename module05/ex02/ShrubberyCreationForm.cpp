@@ -6,7 +6,7 @@
 /*   By: okamili <okamili@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 00:57:42 by okamili           #+#    #+#             */
-/*   Updated: 2023/11/30 13:55:41 by okamili          ###   ########.fr       */
+/*   Updated: 2024/05/24 17:00:15 by okamili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@ ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &origin
 
 ShrubberyCreationForm::~ShrubberyCreationForm(void)
 {
+}
+
+ShrubberyCreationForm	&ShrubberyCreationForm::operator=(ShrubberyCreationForm &origin)
+{
+	_target = origin._target;
+	return (*this);
 }
 
 const char	*ShrubberyCreationForm::FileOperationException::what(void) const throw()

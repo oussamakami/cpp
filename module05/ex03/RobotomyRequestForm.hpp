@@ -6,7 +6,7 @@
 /*   By: okamili <okamili@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 02:19:19 by okamili           #+#    #+#             */
-/*   Updated: 2023/11/30 07:28:37 by okamili          ###   ########.fr       */
+/*   Updated: 2024/05/24 17:03:16 by okamili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ class RobotomyRequestForm : public AForm
 		RobotomyRequestForm(const std::string target);
 		RobotomyRequestForm(const RobotomyRequestForm &origin);
 		~RobotomyRequestForm(void);
+
+		RobotomyRequestForm	&operator=(RobotomyRequestForm &origin);
 		void	execute(Bureaucrat const &executor) const;
 };
 

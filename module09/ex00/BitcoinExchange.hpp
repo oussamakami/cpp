@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PresidentialPardonForm.hpp                         :+:      :+:    :+:   */
+/*   BitcoinExchange.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: okamili <okamili@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/30 02:22:17 by okamili           #+#    #+#             */
-/*   Updated: 2024/05/24 17:02:44 by okamili          ###   ########.fr       */
+/*   Created: 2024/05/23 19:16:49 by okamili           #+#    #+#             */
+/*   Updated: 2024/05/24 00:59:37 by okamili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRESIDENTIALPARDON_HPP
-# define PRESIDENTIALPARDON_HPP
+#ifndef BITCOINEXCHANGE_HPP
+# define BITCOINEXCHANGE_HPP
 
-# include "AForm.hpp"
+#include <iostream>
+#include <fstream>
+#include <cstdlib>
+#include <map>
 
-class PresidentialPardonForm : public AForm
+class BitcoinExchange
 {
 	private:
-		std::string	_target;
+		std::map<std::string, float> _Database;
 	public:
-		PresidentialPardonForm(const std::string target);
-		PresidentialPardonForm(const PresidentialPardonForm &origin);
-		~PresidentialPardonForm(void);
-
-		PresidentialPardonForm	&operator=(PresidentialPardonForm &origin);
-		void	execute(Bureaucrat const &executor) const;
+		BitcoinExchange(void);
+		~BitcoinExchange(void);
+		float	getDateExchange(const std::string &date);
+	
 };
 
 #endif
