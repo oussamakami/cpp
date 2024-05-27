@@ -6,16 +6,17 @@
 /*   By: okamili <okamili@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 19:20:28 by okamili           #+#    #+#             */
-/*   Updated: 2024/05/24 01:06:47 by okamili          ###   ########.fr       */
+/*   Updated: 2024/05/27 03:34:38 by okamili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 #include <sstream>
 
+
 static float stringToFloat(const std::string &value)
 {
-	float				result;
+	float			result;
 	std::stringstream	ss(value);
 
 	ss >> result;
@@ -24,9 +25,13 @@ static float stringToFloat(const std::string &value)
 
 static bool	isAllDigits(const std::string &value)
 {
+	size_t	periodsCount = 0;
+	
 	for (int i = 0; value[i]; i++)
 	{
-		if (!isdigit(value[i]))
+		if (value[i] == '.' && value[i + 1] && !periodsCount)
+			periodsCount++;
+		else if (!isdigit(value[i]))
 			return (false);
 	}
 	return (true);
@@ -55,6 +60,35 @@ static bool	isValidDate(const std::string &date)
 	return (true);
 }
 
+static bool	isValidValue(const std::string &value)
+{
+	float	temp;
+
+	temp = stringToFloat(value);
+
+	if (temp < 0)
+	{
+		std::cerr << "ERROR: not a positive number.\n";
+		return (false);
+	}
+	if (temp > 1000)
+	{
+		std::cerr << "ERROR: too large of a number.\n";
+		return (false);
+	}
+	return (true);
+}
+
+static std::string trim(const std::string &str, const std::string &charList)
+{
+	size_t head = str.find_first_not_of(charList);
+	size_t tail = str.find_last_not_of(charList);
+
+	if (head != std::string::npos)
+		return (str.substr(head, ++tail - head));
+	return ("");
+}
+
 BitcoinExchange::BitcoinExchange(void)
 {
 	std::string		key;
@@ -77,9 +111,22 @@ BitcoinExchange::BitcoinExchange(void)
 	data.close();
 }
 
+BitcoinExchange::BitcoinExchange(const BitcoinExchange &origin)
+{
+	*this = origin;
+}
+
 BitcoinExchange::~BitcoinExchange(void)
 {
 	
+}
+
+BitcoinExchange	&BitcoinExchange::operator=(const BitcoinExchange &origin)
+{
+	if (this != &origin)
+		return (*this);
+	this->_Database = origin._Database;
+	return (*this);
 }
 
 float	BitcoinExchange::getDateExchange(const std::string &date)
@@ -89,7 +136,7 @@ float	BitcoinExchange::getDateExchange(const std::string &date)
 	
 	if (!isValidDate(date))
 	{
-		std::cerr << "ERROR: invalide date \"" << date << "\"\n";
+		std::cerr << "ERROR: Bad input => " << date << "\n";
 		return (-1); 
 	}
 	
@@ -101,4 +148,38 @@ float	BitcoinExchange::getDateExchange(const std::string &date)
 			result = it->second;
 	}
 	return (result);
+}
+
+void BitcoinExchange::handleTableData(const std::string &path)
+{
+	float			exchangerate;
+	std::string		key;
+	std::string		value;
+	std::string		line;
+	std::ifstream	data(path.c_str());
+
+	if (!data.is_open())
+	{
+		std::cerr << "ERROR: unable to access file.\n";
+		return ;
+	}
+	getline(data, line);
+	if (line != "date | value")
+	{
+		std::cerr << "ERROR: invalid file format.\n";
+		data.close();
+		return ;
+	}
+	while (getline(data, line))
+	{
+		key = trim(line.substr(0, line.find("|")), " ");
+		value = trim(line.substr(line.find("|") + 1), " ");
+		exchangerate = getDateExchange(key);
+
+		if (exchangerate < 0)
+			continue;
+		if (isValidValue(value))
+			std::cout << key << " => " << value << " = " << exchangerate * stringToFloat(value) << "\n";
+	}
+	data.close();
 }
