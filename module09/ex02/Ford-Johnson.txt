@@ -1,0 +1,85 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Ford-Johnson.txt                                   :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: okamili <okamili@student.1337.ma>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/05/29 11:27:35 by okamili           #+#    #+#              #
+#    Updated: 2024/05/29 13:05:02 by okamili          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+
+
+Ford-Johnson Algorithm Explanation:
+
+1. Divide the list of (n) elements into pairs, resulting in (n/2) pairs of size 2.
+3. imagine each pair in the following format (a, b)
+2. Sort each pair so that the larger element is at 'b' location.
+4. Create a new list 'Main chain' containing a(0) plus all the larger element (b) from each pair.
+5. Recursively sort 'Main chain' following steps 1 to 5 until 'Main chain' size is less than 3.
+6. Use the sorted sequence of larger elements 'Main chain' to sort the pairs.
+7. create the following lists (the key is to imagine this sturcture without implementing it to preserve memory):
+   - 'Pending': contains the smaller elements a(1), a(2), ..., a(n).
+   - 'Main chain': contains the sorted larger elements and the first smaller element a(0), b(0), b(1), b(2), ..., b(n).
+8. insert 'Pending' list into 'main chain' using binary insertion.
+9. The main chain now contains the fully sorted list of elements.
+
+Example:
+###ITERATION NUM 1###
+- Numbers to sort: (5, 2, 1, 9, 3, 7, 0)
+- Pending = ()    Main-chain: ()
+- Original pairs: (5, 2), (1, 9), (3, 7) (0, NULL) // since one pair is incomplete lets put it in Pending.
+- Pending = (0)    Main-chain: ()
+- Original pairs: (5, 2), (1, 9), (3, 7) //let sort the numbers inside each pair
+- Sorted pairs: (2, 5), (1, 9), (3, 7)
+- Pending = (0)    Main-chain: (2, 5, 9, 7)
+		###ITERATION NUM 2###
+		- Numbers to sort: (2, 5, 9, 7)
+		- Pending = ()    Main-chain: ()
+		- Original pairs: (2, 5), (9, 7)
+		- Sorted pairs: (2, 5), (7, 9)
+		- Pending = ()    Main-chain: (2, 5, 9)
+				###ITERATION NUM 3###
+				- Numbers to sort: (2, 5, 9)
+				- Pending = ()    Main-chain: ()
+				- Original pairs: (2, 5), (9, NULL) //since one pair is incomplete lets put it in Pending.
+				- Pending = (9)    Main-chain: ()
+				- Sorted pairs: (2, 5)
+				- Pending = (9)    Main-chain: (2, 5) 
+				- NO need to call another iteration since Main-chain has less than 3 numbers
+				- add a1 a2 a3 ... an into pending //we skip this step since we only have one pair (2, 5) which is (a0, b0)
+				- Insert Pending into Main-chain using binary insertion
+				- Pending = ()    Main-chain: (2, 5, 9)
+				###ITERATION NUM 3 RETURNS (2, 5, 9)
+		- set Main-Chain to equal the return of the ITERATION 3
+		- Pending = ()    Main-chain: (2, 5, 9)
+		- Pairs Sorted Using Main-chain: (2, 5) (7, 9)
+		- add a1 a2 a3 ... an into pending (2, 5) (7, 9) which is (a0, b0) (a1, b1)
+		- Pending = (7)    Main-chain: (2, 5, 9)
+		- Insert Pending into Main-chain using binary insertion
+		- Pending = ()    Main-chain: (2, 5, 7, 9)
+		###ITERATION NUM 2 RETURNS (2, 5, 7, 9)
+- set Main-Chain to equal the return of the ITERATION 2
+- Pending = (0)    Main-chain: (2, 5, 7, 9)
+- Pairs Sorted Using Main-chain: (2, 5), (3, 7), (1, 9)
+- add a1 a2 a3 ... an into pending (2, 5), (3, 7), (1, 9) which is (a0, b0) (a1, b1) (a2, b2)
+- Pending = (0, 3, 1)    Main-chain: (2, 5, 7, 9)
+- Insert Pending into Main-chain using binary insertion
+- Pending = ()    Main-chain: (0, 1, 2, 3, 5, 7, 9)
+###ITERATION NUM 1 RETURNS (0, 1, 2, 3, 5, 7, 9)
+
+Note: Binary insertion reduces insertion steps from O(N) to a maximum of O(log N) by combining insertion sort and binary search.
+
+Resource: https://arxiv.org/pdf/1905.09656
+
+PS: In my implementation, I utilized binary insertion for inserting elements into the main chain, as specified by the paper. The debate between using Jacobsthal and binary insertion, as discussed on Stack Overflow, can be summarized as follows:
+
+    Jacobsthal can theoretically be slightly faster than binary insertion.
+    Jacobsthal has a more complex implementation compared to binary insertion.
+    Jacobsthal requires higher computation for large data sets compared to binary insertion, which renders its advantage negligible for such cases.
+    Considering all factors, Jacobsthal provides a trade-off between complexity and efficiency for small data sets, but loses its advantage with large data sets.
+    Binary insertion offers a balance between efficiency and complexity, making it generally the recommended choice.
+
+Ultimately, the choice between Jacobsthal and binary insertion depends on your personal preference.
