@@ -1,6 +1,6 @@
 CXX			=	c++
-CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98 -g
-FILES		=	main.cpp
+CXXFLAGS	=	 -std=c++98 -g
+FILES		=	PmergeMe.cpp main.cpp
 OBJ			=	$(FILES:.cpp=.o)
 NAME		=	PmergeMe
 
